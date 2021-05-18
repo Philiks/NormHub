@@ -37,7 +37,7 @@ class RegisteredUserController extends Controller
             'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
-            'profile_id' => 'string|exists:profile,id',
+            'photo' => 'image|mimes:jpg,jpeg,bmp,png|max:2048',
         ]);
 
         $user = User::create([
@@ -45,8 +45,19 @@ class RegisteredUserController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'profile_id' => $request->profile_id,
         ]);
+
+        $folder = 'defaults';
+        $filename = 'default.png';
+
+        if ($request->hasFile('photo')) {
+            $folder = "profiles";
+            $file = $request->file('photo');
+            $filename = $user->id . '/' . $file->getClientOriginalName();            
+            $file->storeAs($folder, $filename);
+        }
+
+        $user->update(['profile_image' => $folder . '/' . $filename]);
 
         event(new Registered($user));
 
