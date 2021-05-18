@@ -33,16 +33,31 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'fullname' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
+            'photo' => 'image|mimes:jpg,jpeg,bmp,png|max:2048',
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'fullname' => $request->fullname,
+            'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        $folder = 'defaults';
+        $filename = 'default.png';
+
+        if ($request->hasFile('photo')) {
+            $folder = "profiles";
+            $file = $request->file('photo');
+            $filename = $user->id . '/' . $file->getClientOriginalName();            
+            $file->storeAs($folder, $filename);
+        }
+
+        $user->update(['profile_image' => $folder . '/' . $filename]);
 
         event(new Registered($user));
 
