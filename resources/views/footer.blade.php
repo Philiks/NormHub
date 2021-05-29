@@ -1,6 +1,6 @@
 <x-app-layout>
     <footer>
-        <div class="container lg mx-24 bg-gradient-to-r from-orange to-black px-12 border-gray-50 max-w-7xl">
+        <div class="container lg mx-24 bg-gradient-to-r from-orange to-black px-12 border-gray-50 fixed">
             <div class="bg-gradient-to-r from-orange to-black">
             <h3 class="text-white"><strong><center>For more information visit and contact us in:</center></strong></h3>
             <center>
