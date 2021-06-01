@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\Photo;
 use App\Models\Blog;
-use App\Models\Photo;
 use App\Models\Tag;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -58,10 +58,7 @@ class BlogController extends Controller
             'read_time' => $read_time,
         ]);
 
-        $request->request->add([
-            'folder' => 'blogs/' . auth()->user()->id, 
-            'caption' => 'blog thumbnail']);
-        (new PhotoController)->store($request, $blog);
+        Photo::store($request->file('photo'), $blog, 'blogs');
 
         $tags = explode(',', $request->tags);
         $tags_final = [];
@@ -125,17 +122,7 @@ class BlogController extends Controller
             'read_time' => $read_time,
         ]);
 
-        if ($blog->main_photo_id != $request->main_photo_id) {
-            // Deletion.
-            $photo = Photo::find($request->main_photo_id);
-            (new PhotoController)->delete($photo, $blog);
-
-            // Creation.
-            $request->request->add([
-                'folder' => 'blogs', 
-                'caption' => 'blog thumbnail']);
-            (new PhotoController)->store($request, $blog);
-        }
+        Photo::store($request->file('photo'), $blog, 'blogs');
 
         $blog->tags()->sync(explode(',', $request->tags));
 

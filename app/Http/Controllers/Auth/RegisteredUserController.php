@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Facades\Photo;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use App\Services\PhotoService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,17 +49,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $folder = 'defaults';
-        $filename = 'default.png';
-
-        if ($request->hasFile('photo')) {
-            $folder = "profiles";
-            $file = $request->file('photo');
-            $filename = $user->id . '/' . $file->getClientOriginalName();            
-            $file->storeAs($folder, $filename);
-        }
-
-        $user->update(['profile_image' => $folder . '/' . $filename]);
+        Photo::store($request->file('photo'), $user, 'profiles');
 
         event(new Registered($user));
 
