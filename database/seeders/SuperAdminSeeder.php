@@ -15,17 +15,12 @@ class SuperAdminSeeder extends Seeder
      */
     public function run()
     {
-        $photo = Photo::create([
-            'folder' => 'admin/profiles',
-            'filename' => 'admin.png'
-        ]);
-
         User::create([
             'fullname' => 'Admin',
             'username' => 'admin',
             'email' => 'admin@admin.com',
             'password' => bcrypt('strongadminpassword'),
-            'profile_id' => $photo->id,
+            'profile_photo' => 'profiles/admins/admin.png',
             'is_admin' => true
         ]);
     }
