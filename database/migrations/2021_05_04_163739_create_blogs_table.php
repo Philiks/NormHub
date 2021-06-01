@@ -17,7 +17,7 @@ class CreateBlogsTable extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('author_id')->constrained('users');
             $table->string('title');
-            $table->foreignUuid('main_photo_id')->nullable()->comment('path to the image');
+            $table->foreignUuid('main_photo')->nullable()->comment('path to the photo');
             $table->boolean('is_featured')->default(false);
             $table->longText('content');
             $table->integer('read_time')->comment('in seconds');
