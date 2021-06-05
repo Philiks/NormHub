@@ -59,7 +59,7 @@ class Blog extends Model
     protected $fillable = [
         'author_id',
         'title',
-        'main_photo_id',
+        'main_photo',
         'is_featured',
         'content',
         'read_time',
