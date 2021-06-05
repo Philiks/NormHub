@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <x-auth-card>
+    <x-card>
         <x-slot name="logo">
             <a href="/">
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
@@ -9,8 +9,11 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
             @csrf
+
+            <!-- Photo -->
+            @livewire('upload-image', ['default_photo' => 'profile'])
 
             <!-- FullName -->
             <div>
@@ -62,5 +65,5 @@
                 </x-button>
             </div>
         </form>
-    </x-auth-card>
+    </x-card>
 </x-guest-layout>
