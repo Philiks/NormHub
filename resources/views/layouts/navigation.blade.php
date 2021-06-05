@@ -23,7 +23,7 @@
 
             @guest
                 <div class="mt-50 space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="GET" action="{{ route('login') }}">
                         @csrf
 
                         <x-button :href="route('login')">
