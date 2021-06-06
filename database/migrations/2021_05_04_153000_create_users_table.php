@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->foreignUuid('profile_photo')->nullable()->comment('path to the photo');
+            $table->string('profile_photo')->nullable()->comment('path to the photo');
             $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
