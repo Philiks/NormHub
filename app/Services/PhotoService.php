@@ -34,15 +34,20 @@ class PhotoService
         if (!($model instanceof User || $model instanceof Blog))
             throw new InvalidArgumentException('$model is not an instance of User or Blog');
         
-        $filename = $model->id . '/' . $photo->getClientOriginalName();
-        $photo->storeAs($folder_name, $filename);
-
+        $folder_name .= '/' . $model->id;
+        $path = public_path('images/' . $folder_name);
+        $photo->move($path, $photo->getClientOriginalName());
+        $resized_photo = Image::make($path . '/' . $photo->getClientOriginalName());
+        
         $field = '';
-        if ($model instanceof User)
+        if ($model instanceof User) {
             $field = 'profile_photo';
-        else if ($model instanceof Blog)
+            $resized_photo->resize(PhotoService::PROFILE_WIDTH, PhotoService::PROFILE_HEIGHT)->save();
+        } else if ($model instanceof Blog) {
             $field = 'main_photo';
+            $resized_photo->resize(PhotoService::BLOG_WIDTH, PhotoService::BLOG_HEIGHT)->save();
+        }
 
-        $model->update([$field => $folder_name . '/' . $filename]);
+        $model->update([$field => $folder_name . '/' . $photo->getClientOriginalName()]);
     }
 }
