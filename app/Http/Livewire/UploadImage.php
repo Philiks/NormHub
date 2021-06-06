@@ -16,17 +16,17 @@ class UploadImage extends Component
     public $width;
     public $height;
 
-    public function mount($for = 'profile')
+    public function mount($default_photo, $is_round = true)
     {
         if (old('photo')) {
             $this->photo = old('photo');
             return;
         }
 
-        $this->default_photo = $for == 'profile' ? 'profile.png' : 'blog.png';
-        $this->border = $for == 'profile' ? 'rounded-full' : 'rounded-xl';
-        $this->width = $for == 'profile' ? '200' : '300';
-        $this->height = $for == 'profile' ? '200' : '250';
+        $this->default_photo = $default_photo;
+        $this->border = $is_round ? 'rounded-full' : 'rounded-xl';
+        $this->width = $is_round ? '200' : '300';
+        $this->height = $is_round ? '200' : '250';
     }
 
     public function render()
