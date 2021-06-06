@@ -85,6 +85,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Method for accessing blogs from blogs table.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function blogs() {
         return $this->hasMany(Blog::class);
     }
