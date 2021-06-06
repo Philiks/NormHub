@@ -11,7 +11,7 @@ class DisplayProfile extends Component
     public function mount()
     {
         if (auth()->user()->profile_photo != null)
-            $this->profile = asset('storage/' . auth()->user()->profile_photo);
+            $this->profile = asset('images/' . auth()->user()->profile_photo);
     }
 
     public function render()
