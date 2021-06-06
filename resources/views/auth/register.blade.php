@@ -7,7 +7,7 @@
             @csrf
 
             <!-- Photo -->
-            @livewire('upload-image', ['default_photo' => 'profile'])
+            @livewire('upload-image', ['default_photo' => asset('storage/defaults/profile.png')])
 
             <!-- FullName -->
             <div>

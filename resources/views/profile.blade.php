@@ -1,73 +1,60 @@
 <x-app-layout>
-    <div class="flex justify-between px-6">
-        
+    <div class="flex justify-between">
+        <div class="flex-auto">
             <x-card>
-                <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-                    @csrf
+                <img class="cursor-pointer bg-cover" onclick="document.getElementById('go').click();"
+                            src="{{ asset('storage/icons/edit.png') }}"
+                            width="20" height="20" />
+                <a id="go" class="hidden" href="{{ route('user.edit', $user->id) }}"></a>
         
-                    <!-- Photo -->
-                    @livewire('upload-image', ['default_photo' => 'profile'])
-        
-                    <!-- FullName -->
-                    <div>
-                        <x-label for="fullname" :value="__('FullName')" />
-        
-                        <x-input id="fullname" class="block mt-1 w-full" type="text" name="fullname" :value="old('fullname')" required autofocus />
+                <!-- Photo -->
+                @livewire('upload-image', ['default_photo' => asset('images/' . $user->profile_photo)])
+    
+                <!-- FullName -->
+                <div>
+                    <div class="text-base text-white">
+                        {{ __('FullName') }}
                     </div>
-        
-                    <!-- Userame -->
-                    <div class="mt-4">
-                        <x-label for="username" :value="__('Username')" />
-        
-                        <x-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus />
-                    </div>
-        
-                    <!-- Email Address -->
-                    <div class="mt-4">
-                        <x-label for="email" :value="__('Email')" />
-        
-                        <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-                    </div>
-        
-                    <!-- Password -->
-                    <div class="mt-4">
-                        <x-label for="password" :value="__('Password')" />
-        
-                        <x-input id="password" class="block mt-1 w-full"
-                                        type="password"
-                                        name="password"
-                                        required autocomplete="new-password" />
-                    </div>
-        
-                    <!-- Confirm Password -->
-                    <div class="mt-4">
-                        <x-label for="password_confirmation" :value="__('Confirm Password')" />
-        
-                        <x-input id="password_confirmation" class="block mt-1 w-full"
-                                        type="password"
-                                        name="password_confirmation" required />
-                    </div>
-        
-                    <div class="flex items-center justify-end mt-4">
-                        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                            {{ __('Already registered?') }}
-                        </a>
-        
-                        <x-button class="ml-4">
-                            {{ __('Register') }}
-                        </x-button>
-                    </div>
-                </form>
-            </x-card>
-
-        <div class="flex-auto py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        Profile
+                    <div class="text-xl text-white font-bold">
+                        {{ $user->fullname }}
                     </div>
                 </div>
-            </div>
+    
+                <!-- Userame -->
+                <div class="mt-4">
+                    <div class="text-base text-white">
+                        {{ __('Username') }}
+                    </div>
+                    <div class="text-xl text-white font-bold">
+                        {{ $user->username }}
+                    </div>
+                </div>
+    
+                <!-- Email Address -->
+                <div class="mt-4">
+                    <div class="text-base text-white">
+                        {{ __('Email') }}
+                    </div>
+                    <div class="text-xl text-white font-bold">
+                        {{ $user->email }}
+                    </div>
+                </div>
+            </x-card>
+        </div>
+
+        <div class="flex-auto mt-6">
+            @forelse ($blogs as $blog)
+                
+            @empty
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6 bg-white border-b border-gray-200">
+                            You have not written any blogs yet.
+                            <a class="text-orange-dark" href="{{ route('blog.create') }}">Write One.</a>
+                        </div>
+                    </div>
+                </div>
+            @endforelse
         </div>
     </div>
 </x-app-layout>

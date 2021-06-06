@@ -62,8 +62,13 @@
                                     </div>
                                 </button>
                             </x-slot>
-
+                            
                             <x-slot name="content">
+                                <!-- Profile -->
+                                <x-dropdown-link :href="route('user.show', auth()->user()->id)">
+                                    {{ __('My Profile') }}
+                                </x-dropdown-link>
+                                
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -126,6 +131,11 @@
                 </div>
 
                 <div class="mt-3 space-y-1">
+                    <!-- Profile -->
+                    <x-responsive-nav-link :href="route('user.show', auth()->user()->id)">
+                        {{ __('My Profike') }}
+                    </x-responsive-nav-link>
+
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
