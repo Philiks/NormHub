@@ -6,7 +6,7 @@ use App\Models\Blog;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
-use Intervention\Image\ImageManagerStatic as Image;
+use Intervention\Image\Facades\Image;
 use InvalidArgumentException;
 
 class PhotoService
@@ -34,21 +34,14 @@ class PhotoService
         if (!($model instanceof User || $model instanceof Blog))
             throw new InvalidArgumentException('$model is not an instance of User or Blog');
         
-        $field = '';
-        if ($model instanceof User) {
-            $field = 'profile_photo';
-            $width = PhotoService::PROFILE_WIDTH;
-            $height = PhotoService::PROFILE_HEIGHT;
-        } else if ($model instanceof Blog) {
-            $field = 'main_photo';
-            $width = PhotoService::BLOG_WIDTH;
-            $height = PhotoService::BLOG_HEIGHT;
-        }
-
         $filename = $model->id . '/' . $photo->getClientOriginalName();
-        Image::make($photo->getRealPath())
-            ->resize($width, $height)
-            ->save(storage_path($folder_name, $filename));
+        $photo->storeAs($folder_name, $filename);
+
+        $field = '';
+        if ($model instanceof User)
+            $field = 'profile_photo';
+        else if ($model instanceof Blog)
+            $field = 'main_photo';
 
         $model->update([$field => $folder_name . '/' . $filename]);
     }
