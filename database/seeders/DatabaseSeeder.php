@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Photo;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,6 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $this->call([
+            AuthorSeeder::class,
+            FeaturedBlogsSeeder::class,
+            SuperAdminSeeder::class,
+        ]);
     }
 }
