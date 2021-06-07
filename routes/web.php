@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,5 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'dashboard')->name('dashboard');
 
 Route::view('/about-us', 'about-us')->name('about-us');
+
+Route::get('/blog/{id}', [BlogController::class, 'show']);
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/blogs', [BlogController::class, 'index']);
+    Route::resource('blog', BlogController::class);
+});
 
 require __DIR__.'/auth.php';

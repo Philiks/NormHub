@@ -65,7 +65,8 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 
 Route::get('/users', [UserController::class, 'index'])
-                ->middleware('auth');
+                ->middleware('auth')
+                ->name('users');
 
 Route::resource('/user', UserController::class)
                 ->only(['show', 'edit', 'update'])
