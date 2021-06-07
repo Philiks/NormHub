@@ -20,7 +20,7 @@ class CreateBlogsTable extends Migration
             $table->string('main_photo')->nullable()->comment('path to the photo');
             $table->boolean('is_featured')->default(false);
             $table->longText('content');
-            $table->integer('read_time')->comment('in seconds');
+            $table->integer('read_time')->default(0)->comment('in minutes');
             $table->integer('like_count')->default(0);
             $table->integer('comment_count')->default(0);
             $table->timestamps();
