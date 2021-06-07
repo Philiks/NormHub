@@ -93,14 +93,49 @@ class Blog extends Model
     }
 
     /**
-     * TODO: Create pivot tables for blog_comment, comment_comment, blog_tag.
      * Method for accessing comments from one-to-many relationship
      * using pivot table blog_comment.
      * 
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
     public function comments()
     {
-        return $this->belongsToMany(Comment::class);
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Method for accessing auther from many-to-one relationship 
+     * from table users.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function author()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Method for turning read time into words.
+     * 
+     * @return string
+     */
+    public function read_time_str()
+    {
+        if ($this->read_time == 0)
+            return 'less than a minute of reading';
+        else if ($this->read_time == 1)
+            return 'a minute of reading';
+        else
+            return $this->read_time . ' minutes of reading';
+    }
+
+    /**
+     * Method for formatting content. Specifically replacing '\n' with '<br>'.
+     * 
+     * @return string
+     */
+    public function format_content()
+    {
+        return nl2br(stripcslashes($this->content), false);
     }
 }
