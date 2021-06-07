@@ -17,7 +17,7 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased bg-black">
         <div class="bg-black min-h-screen">
             @include('layouts.navigation')
 
