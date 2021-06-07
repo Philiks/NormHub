@@ -16,9 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::all()->where('is_admin', '=', false);
 
-        return view('users')->with('users', $users);
+        return view('user.users')->with('users', $users);
     }
 
     /**
@@ -28,8 +28,8 @@ class UserController extends Controller
      * @return \Illuminate\Contracts\View\View
      */
     public function show(User $user)
-    {
-        return view('profile')->with(['user' => $user, 'blogs' => $user->blogs()]);
+    {   
+        return view('user.profile')->with(['user' => $user]);
     }
 
     /**
@@ -40,7 +40,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('profile-edit')->with('user', $user);
+        return view('user.profile-edit')->with('user', $user);
     }
 
     /**

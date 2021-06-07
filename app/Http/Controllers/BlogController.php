@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Photo;
+use App\Facades\Story;
 use App\Models\Blog;
-use App\Models\Tag;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 
@@ -13,21 +14,22 @@ class BlogController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
-        return Blog::with('comments')->with('tags')->get()->paginate(6);
+        // return Blog::with('comments')->with('tags')->get()->paginate(6);
+        return view('blog.stories');
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
-        return view('blog-write');
+        return view('blog.story-write');
     }
 
     /**
@@ -40,35 +42,23 @@ class BlogController extends Controller
     {
         $request->validate([
             'title' => 'string|max:255',
-            'is_featured' => 'boolean',
             'content' => 'string',
             'tags' => 'string|max:255',
         ]);
 
-        // Source: https://scholarwithin.com/average-reading-speed
-        // Took the average of 200 and 350 (college and adult range).
-        $AVERAGE_WORD_PER_MINUTE = 275;
-        $read_time = count(explode(' ', $request->content)) / $AVERAGE_WORD_PER_MINUTE;
-
         $blog = Blog::create([
             'author_id' => auth()->user()->id,
             'title' => $request->title,
-            'is_featured' => $request->is_featured ?? true,
+            'is_featured' => $request->is_featured ?? false,
             'content' => $request->content,
-            'read_time' => $read_time,
         ]);
 
-        Photo::store($request->file('photo'), $blog, 'blogs');
-
-        $tags = explode(',', $request->tags);
-        $tags_final = [];
-        foreach ($tags as $tag) {
-            $filtered_tag = Tag::firstOrCreate(['title' => $tag]);
-            array_push($tags_final, $filtered_tag->id);
-        }
-
-        $blog->tags()->sync($tags_final);
-
+        Story::compute_read_time($request->content, $blog);
+        Story::sync_tags($request->tags, $blog);
+        
+        if ($request->hasFile('photo'))
+            Photo::store($request->file('photo'), $blog, 'blogs');
+        
         return redirect(RouteServiceProvider::HOME);
     }
 
@@ -80,7 +70,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        return view('blog-read')->with('blog', $blog);
+        return view('blog.story-read')->with('blog', $blog);
     }
 
     /**
@@ -91,7 +81,7 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        return view('blog-write')->with($blog);
+        return view('blog.story-edit')->with($blog);
     }
 
     /**
@@ -99,9 +89,10 @@ class BlogController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Blog  $blog
+     * @param  \App\Models\User  $author
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request, Blog $blog, User $author)
     {
         $request->validate([
             'title' => 'string|max:255',
@@ -110,23 +101,20 @@ class BlogController extends Controller
             'tags' => 'string|max:255',
         ]);
 
-        // Source: https://scholarwithin.com/average-reading-speed
-        // Took the average of 200 and 350 (college and adult range).
-        $AVERAGE_WORD_PER_MINUTE = 275;
-        $read_time = count(explode(' ', $request->content)) / $AVERAGE_WORD_PER_MINUTE;
-
         $blog->update([
+            'author_id' => $author->id,
             'title' => $request->title,
-            'is_featured' => $request->is_featured,
+            'is_featured' => $request->is_featured ?? false,
             'content' => $request->content,
-            'read_time' => $read_time,
         ]);
 
-        Photo::store($request->file('photo'), $blog, 'blogs');
-
-        $blog->tags()->sync(explode(',', $request->tags));
-
-        return redirect(RouteServiceProvider::HOME);
+        Story::compute_read_time($request->content, $blog);
+        Story::sync_tags($request->tags, $blog);
+        if ($request->has('photo') && 
+            $request->file('photo')->getClientOriginalName() != explode('/', $blog->main_photo)[2]) // [0]profiles [1]id [2]name
+            Photo::store($request->file('photo'), $blog, 'blogs');
+        
+        return redirect()->route('blog.show', $blog->id);
     }
 
     /**
