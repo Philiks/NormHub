@@ -9,18 +9,18 @@
             <!-- Photo -->
             @livewire('upload-image', ['default_photo' => asset('storage/defaults/profile.png')])
 
-            <!-- FullName -->
+            <!-- Fullname -->
             <div>
-                <x-label for="fullname" :value="__('FullName')" />
+                <x-label for="fullname" :value="__('Fullname')" />
 
                 <x-input id="fullname" class="block mt-1 w-full" type="text" name="fullname" :value="old('fullname')" required autofocus />
             </div>
 
-            <!-- Userame -->
+            <!-- Username -->
             <div class="mt-4">
                 <x-label for="username" :value="__('Username')" />
 
-                <x-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus />
+                <x-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required />
             </div>
 
             <!-- Email Address -->
