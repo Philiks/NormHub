@@ -25,7 +25,7 @@ class UploadImage extends Component
 
         $this->default_photo = $default_photo;
         $this->border = $is_round ? 'rounded-full' : 'rounded-xl';
-        $this->width = $is_round ? '200' : '300';
+        $this->width = $is_round ? '200' : '500';
         $this->height = $is_round ? '200' : '250';
     }
 
