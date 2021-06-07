@@ -18,6 +18,14 @@
                     <x-nav-link :href="route('about-us')" :active="request()->routeIs('about-us')">
                         {{ __('About Us') }}
                     </x-nav-link>
+
+                    @auth
+                        @if (auth()->user()->is_admin)
+                            <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
+                                {{ __('Check Users') }}
+                            </x-nav-link>    
+                        @endif
+                    @endauth
                 </div>
             </div>
 
@@ -67,6 +75,11 @@
                                 <!-- Profile -->
                                 <x-dropdown-link :href="route('user.show', auth()->user()->id)">
                                     {{ __('My Profile') }}
+                                </x-dropdown-link>
+
+                                <!-- Write Blog -->
+                                <x-dropdown-link :href="route('blog.create')">
+                                    {{ __('Write Story') }}
                                 </x-dropdown-link>
                                 
                                 <!-- Authentication -->
@@ -133,7 +146,12 @@
                 <div class="mt-3 space-y-1">
                     <!-- Profile -->
                     <x-responsive-nav-link :href="route('user.show', auth()->user()->id)">
-                        {{ __('My Profike') }}
+                        {{ __('My Profile') }}
+                    </x-responsive-nav-link>
+
+                    <!-- Write Blog -->
+                    <x-responsive-nav-link :href="route('blog.create')">
+                        {{ __('Write Story') }}
                     </x-responsive-nav-link>
 
                     <!-- Authentication -->
