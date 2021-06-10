@@ -25,7 +25,10 @@
             <main>
                 {{ $slot }}
             </main>
+            
+            @include('footer')
         </div>
+        
         @livewireScripts
     </body>
 </html>
