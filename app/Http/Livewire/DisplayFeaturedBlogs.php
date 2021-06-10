@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Models\Blog;
-use App\Models\User;
 use Livewire\Component;
 
 class DisplayFeaturedBlogs extends Component
