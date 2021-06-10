@@ -64,10 +64,9 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->middleware('auth')
                 ->name('logout');
 
-Route::get('/users', [UserController::class, 'index'])
-                ->middleware('auth')
-                ->name('users');
+Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show');
 
+Route::view('/users', 'user.users')->middleware(['auth', 'isAdmin'])->name('users');
 Route::resource('/user', UserController::class)
-                ->only(['show', 'edit', 'update'])
+                ->only(['edit', 'update'])
                 ->middleware('auth');
