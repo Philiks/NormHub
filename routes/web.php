@@ -17,12 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'dashboard')->name('dashboard');
 Route::view('/about-us', 'about-us')->name('about-us');
 
-Route::get('/blog', [BlogController::class, 'show'])->name('blog.show');
-
 Route::middleware(['auth'])->group(function () {
     Route::view('/terms-and-services', 'terms-and-services')->name('terms-and-services');
     Route::view('/blogs', 'blog.blogs')->middleware('isAdmin')->name('blogs');
     Route::resource('/blog', BlogController::class)->except(['index', 'show']);
 });
+
+Route::get('/blog/{blog}', [BlogController::class, 'show'])->name('blog.show');
 
 require __DIR__.'/auth.php';
