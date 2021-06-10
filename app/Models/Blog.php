@@ -63,8 +63,6 @@ class Blog extends Model
         'is_featured',
         'content',
         'read_time',
-        'like_count',
-        'comment_count',
         'tag_id',
     ];
 
@@ -137,5 +135,14 @@ class Blog extends Model
     public function format_content()
     {
         return nl2br(stripcslashes($this->content), false);
+    }
+
+    public function csv_tags()
+    {
+        $tag_titles = [];
+        foreach ($this->tags as $tag)
+            array_push($tag_titles, $tag->title);
+
+        return implode(',', $tag_titles);
     }
 }
