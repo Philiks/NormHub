@@ -14,7 +14,7 @@ class PhotoService
     const PROFILE_WIDTH = 240;
     const PROFILE_HEIGHT = 240;
     const BLOG_WIDTH = 360;
-    const BLOG_HEIGHT = 300;
+    const BLOG_HEIGHT = 360;
 
     /**
      * Store the uploaded photo on the filesystem disk.
