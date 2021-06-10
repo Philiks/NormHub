@@ -41,6 +41,10 @@ We recommended to use these 3 web browsers: *Microsoft Edge (Chromium)*, *Google
 ## Creators behind NormHub
 
 **Main Programmer:** [Felix Janopol](https://github.com/Philiks)
-**Web designers:** [Michael Angelo Cerro](https://github.com/miivkyo08), [Christian Kent Magana](https://github.com/ckmagana), [Emmanuel Soriano](https://www.github.com/happySoriano)
+
+**Web designers:**  [Michael Angelo Cerro](https://github.com/miivkyo08), 
+                    [Christian Kent Magana](https://github.com/ckmagana), 
+                    [Emmanuel Soriano](https://www.github.com/happySoriano)
+
 **Article writing and proofreading:** [Raffy Wamar](https://github.com/waffy-kun)
 &copy; 2021 BSCS - 3A
