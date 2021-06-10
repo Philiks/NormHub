@@ -8,7 +8,7 @@
             @method('PUT')
 
             <!-- Photo -->
-            @livewire('upload-image', ['default_photo' => asset('images/' . $user->profile_photo)])
+            @livewire('upload-image', ['default_photo' => asset($user->profile_photo != null ? 'images/' . $user->profile_photo : 'storage/defaults/profile.png')])
 
             <!-- Fullname -->
             <div>
