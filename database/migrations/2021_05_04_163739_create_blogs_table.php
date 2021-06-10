@@ -15,14 +15,12 @@ class CreateBlogsTable extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('author_id')->constrained('users');
+            $table->foreignUuid('author_id')->constrained('users')->cascadeOnDelete();
             $table->string('title');
             $table->string('main_photo')->nullable()->comment('path to the photo');
             $table->boolean('is_featured')->default(false);
             $table->longText('content');
             $table->integer('read_time')->default(0)->comment('in minutes');
-            $table->integer('like_count')->default(0);
-            $table->integer('comment_count')->default(0);
             $table->timestamps();
         });
     }
