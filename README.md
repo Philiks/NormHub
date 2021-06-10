@@ -6,13 +6,22 @@ NewNormHub is a new type of social networking site that allows our users to weav
 *Read daily articles written by our staff which are almost always a narrative about life under new normal version of every facets our life.
 *Create your own personalized account which will allows, not only to read, but to give feedbacks and reactions to the work of others which stories moved you.
 
-Installation and How to use
+## Required Softwares
+# PHP 7.x +
+# Composer
+# NodeJS
+# Git (optional but recommended)
 
-Place the main folder containg the website in any location within your computer or hard drive.
-Website may be run on your local machine for testing or personal use purposes by setting up a local web server. To launch this website, it is integral to have chosen a domain name and web hosting site.
-You may run the by means of using the command line or by using a web server.
+## Installation and How to use
+# git clone "https://github.com/Philiks/Normhub.git"
+# cd NormHub
+# composer install
+# cp .env.example .env
+# *Create Database preferably using MySql. Named it **normhub_schema**
+# php artisan migrate --seed
+# php artisan serve
 
-Important Details about Its Creation
+## Important Details about Its Creation
 
 NewNormHub was mainly created using the following:
 *HTML - used to create the website's ground structure
