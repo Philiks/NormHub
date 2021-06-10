@@ -1,64 +1,41 @@
 <x-guest-layout>
-    <x-card>
+    <x-wide-card>
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('user.update', $user->id) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('blog.update', $blog->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
-            <!-- Photo -->
-            @livewire('upload-image', ['default_photo' => asset('images/' . $user->profile_photo)])
-
-            <!-- Fullname -->
+            <!-- Title -->
             <div>
-                <x-label for="fullname" :value="__('Fullname')" />
+                <x-label for="title" :value="__('Title')" />
 
-                <x-input id="fullname" class="block mt-1 w-full" type="text" name="fullname" :value="$user->fullname" required autofocus />
+                <x-input id="title" class="text-center text-xl lg:text-3xl block mt-1 w-full" type="text" name="title" :value="$blog->title" required autofocus />
             </div>
 
-            <!-- Username -->
-            <div class="mt-4">
-                <x-label for="username" :value="__('Username')" />
+            <!-- Photo -->
+            @livewire('upload-image', ['default_photo' => asset($blog->main_photo != null ? 'images/' . $blog->main_photo : 'storage/defaults/blog.png'), 'is_round' => false])
 
-                <x-input id="username" class="block mt-1 w-full" type="text" name="username" :value="$user->username" required autofocus />
+            <!-- Content -->
+            <div>
+                <x-label for="content" :value="__('Content')" />
+
+                <x-textarea id="content" class="block mt-1 w-full" type="text" name="content" value="{{ $blog->format_content() }}" required />
             </div>
 
-            <!-- Email Address -->
+            <!-- Tags -->
             <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
+                <x-label for="tags" :value="__('Tags *separate multiple tags using comma \',\' i.e. abc,def.')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="$user->email" required />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Change Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                autocomplete="new-password" />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" />
+                <x-input id="tags" class="block mt-1 w-full" type="text" name="tags" :value="$blog->csv_tags()" required />
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ url()->previous() }}">
-                    {{ __('Back') }}
-                </a>
-
                 <x-button class="ml-4">
-                    {{ __('Update Profile') }}
+                    {{ __('Edit') }}
                 </x-button>
             </div>
         </form>
-    </x-card>
+    </x-wide-card>
 </x-guest-layout>

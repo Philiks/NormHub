@@ -20,7 +20,7 @@
             <div>
                 <x-label for="content" :value="__('Content')" />
 
-                <x-textarea id="content" class="block mt-1 w-full" type="text" name="content" :value="old('content')" required />
+                <x-textarea id="content" class="block mt-1 w-full" type="text" name="content" required />
             </div>
 
             <!-- Tags -->

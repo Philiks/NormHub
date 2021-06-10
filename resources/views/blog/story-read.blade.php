@@ -1,9 +1,16 @@
 <x-app-layout>
     <x-wide-card>
         <div class="flex flex-col items-center">
-            <!-- Title -->
-            <div class="p-3 font-bold text-orange text-center text-xl lg:text-3xl text-white">
-                {{ __($blog->title) }}
+            <div class="flex justify-center items-center">
+                <!-- Title -->
+                <div class="p-3 font-bold text-orange text-center text-xl lg:text-3xl text-white">
+                    {{ __($blog->title) }}
+                </div>
+
+                @author($blog->id)
+                    <x-icon-anchor modelName="blog" action="edit" paramId="{{ $blog->id }}" isInverted=true />
+                    <x-icon-anchor modelName="blog" action="destroy" paramId="{{ $blog->id }}" isInverted=true />
+                @endauthor
             </div>
             
             <!-- Photo -->
