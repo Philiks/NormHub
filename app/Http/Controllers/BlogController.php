@@ -12,17 +12,6 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function index()
-    {
-        // return Blog::with('comments')->with('tags')->get()->paginate(6);
-        return view('blog.stories');
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Contracts\View\View
@@ -81,7 +70,7 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        return view('blog.story-edit')->with($blog);
+        return view('blog.story-edit')->with('blog', $blog);
     }
 
     /**
@@ -89,10 +78,9 @@ class BlogController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Blog  $blog
-     * @param  \App\Models\User  $author
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Blog $blog, User $author)
+    public function update(Request $request, Blog $blog)
     {
         $request->validate([
             'title' => 'string|max:255',
@@ -102,9 +90,9 @@ class BlogController extends Controller
         ]);
 
         $blog->update([
-            'author_id' => $author->id,
+            'author_id' => auth()->user()->id,
             'title' => $request->title,
-            'is_featured' => $request->is_featured ?? false,
+            'is_featured' => $request->is_featured ?? $blog->is_featured,
             'content' => $request->content,
         ]);
 
@@ -125,6 +113,7 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        //
+        $blog->delete();
+        return redirect()->route('user.show', auth()->user()->id);
     }
 }

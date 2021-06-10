@@ -10,18 +10,6 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $users = User::all()->where('is_admin', '=', false);
-
-        return view('user.users')->with('users', $users);
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Models\User  $user
@@ -29,7 +17,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {   
-        return view('user.profile')->with(['user' => $user]);
+        return view('user.profile-read')->with(['user' => $user]);
     }
 
     /**
@@ -68,8 +56,8 @@ class UserController extends Controller
         if ($request->has('password'))
             $user->update(['password' => Hash::make($request->password)]);
 
-        if ($request->has('photo') && 
-            $request->file('photo')->getClientOriginalName() != explode('/', $user->profile_photo)[2]) // [0]profiles [1]id [2]name
+        if ($request->has('photo') && ($user->profile_photo == null ||
+            $request->file('photo')->getClientOriginalName() != explode('/', $user->profile_photo)[2])) // [0]profiles [1]id [2]name
             Photo::store($request->file('photo'), $user, 'profiles');
 
         return redirect()->route('user.show', $user->id);
