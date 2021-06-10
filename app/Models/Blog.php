@@ -91,17 +91,6 @@ class Blog extends Model
     }
 
     /**
-     * Method for accessing comments from one-to-many relationship
-     * using pivot table blog_comment.
-     * 
-     * @return \Illuminate\Database\Eloquent\Relations\hasMany
-     */
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
-
-    /**
      * Method for accessing auther from many-to-one relationship 
      * from table users.
      * 
