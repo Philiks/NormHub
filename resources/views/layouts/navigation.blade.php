@@ -19,13 +19,17 @@
                         {{ __('About Us') }}
                     </x-nav-link>
 
-                    @auth
-                        @if (auth()->user()->is_admin)
-                            <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
-                                {{ __('Check Users') }}
-                            </x-nav-link>    
-                        @endif
-                    @endauth
+                    @admin
+                        <!-- Manage Users -->
+                        <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
+                            {{ __('Check Users') }}
+                        </x-nav-link>
+
+                        <!-- Manage Blogs -->
+                        <x-nav-link :href="route('blogs')" :active="request()->routeIs('blogs')">
+                            {{ __('Check Blogs') }}
+                        </x-nav-link>
+                    @endadmin
                 </div>
             </div>
 
@@ -81,6 +85,11 @@
                                 <x-dropdown-link :href="route('blog.create')">
                                     {{ __('Write Story') }}
                                 </x-dropdown-link>
+
+                                <!-- Terms and Services -->
+                                <x-dropdown-link :href="route('terms-and-services')">
+                                    {{ __('Terms and Services') }}
+                                </x-dropdown-link>
                                 
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">
@@ -119,6 +128,18 @@
             <x-responsive-nav-link :href="route('about-us')" :active="request()->routeIs('about-us')">
                 {{ __('About Us') }}
             </x-responsive-nav-link>
+
+            @admin
+                <!-- Manage Users -->
+                <x-responsive-nav-link :href="route('users')" :active="request()->routeIs('users')">
+                    {{ __('Check Users') }}
+                </x-responsive-nav-link>
+
+                <!-- Manage Blogs -->
+                <x-responsive-nav-link :href="route('blogs')" :active="request()->routeIs('blogs')">
+                    {{ __('Check Blogs') }}
+                </x-responsive-nav-link>
+            @endadmin
         </div>
 
         @guest
@@ -152,6 +173,11 @@
                     <!-- Write Blog -->
                     <x-responsive-nav-link :href="route('blog.create')">
                         {{ __('Write Story') }}
+                    </x-responsive-nav-link>
+
+                    <!-- Terms and Services -->
+                    <x-responsive-nav-link :href="route('terms-and-services')">
+                        {{ __('Terms and Services') }}
                     </x-responsive-nav-link>
 
                     <!-- Authentication -->
