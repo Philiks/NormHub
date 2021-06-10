@@ -1,62 +1,34 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## About NewNormHub
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+NewNormHub is a new type of social networking site that allows our users to weave their own tales of experience especially under this new normal and have it read by thousands of other users. It also serves as a blog site where articles relating to life under the covid-19 or the new normal can be found. This social medium - blog site hybrid allows our users the following:
+*Create their own stories or formulate their thoughts about their daily lives under the covid-19 pandemic.
+*Read other user-made content which will allow us to connect with other content creators in this website.
+*Read daily articles written by our staff which are almost always a narrative about life under new normal version of every facets our life.
+*Create your own personalized account which will allows, not only to read, but to give feedbacks and reactions to the work of others which stories moved you.
 
-## About Laravel
+Installation and How to use
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Place the main folder containg the website in any location within your computer or hard drive.
+Website may be run on your local machine for testing or personal use purposes by setting up a local web server. To launch this website, it is integral to have chosen a domain name and web hosting site.
+You may run the by means of using the command line or by using a web server.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Important Details about Its Creation
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+NewNormHub was mainly created using the following:
+*HTML - used to create the website's ground structure
+*CSS - used to give the website a beautiful look
+*Javascript - was used to add interactivity in the website
+*Bootstrap - to ensure that our website may also be accessible using smart phones
+*Laravel - to easily implement this website following a model-view-controller architectureal pattern and for easy maintenance,
 
-## Learning Laravel
+Recommended Web Browsers
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+We recommended to use these 3 web browsers: Microsoft Edge (Chromium), Google Chrome and Mozilla Firefox for best results. Website is not tested by using other web browsers. The user is free, however, to use another web browser although there is no guarantee about how it will affect the website or user-experience while accessing said website.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+Creators behind NewNormHub
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Main Programmer: Felix Janopol
+Web designers: Michael Angelo Cerro, Christian Kent Magana, Emmanuel Soriano
+Article writing and proofreading: Raffy Wamar
+BSCS - 3A
